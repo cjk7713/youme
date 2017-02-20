@@ -1,0 +1,39 @@
+<div class="sidebar-wrap">
+    <div class="sidebar-title">
+        <h1>菜单</h1>
+    </div>
+    <div class="sidebar-content">
+        <ul class="sidebar-list">
+            <li>
+                <a id="gena" href="javascript:void(0)"><i class="icon-font">&#xe003;</i>常用操作</a>
+                <ul class="sub-menu" id="submenua">
+                    <li><a href="{:url('cate/lst')}"><i class="icon-font">&#xe008;</i>栏目管理</a></li>
+                    <li><a href="{:url('article/lst')}"><i class="icon-font">&#xe005;</i>文章管理</a></li>
+                    <li><a href="{:url('link/lst')}"><i class="icon-font">&#xe052;</i>友情链接</a></li>
+                    <li><a href="{:url('guest/lst')}"><i class="icon-font">&#xe052;</i>留言管理</a></li>
+                </ul>
+            </li>
+            <li>
+                <a id="genb" href="javascript:void(0)"><i class="icon-font">&#xe018;</i>系统管理</a>
+                <ul class="sub-menu"id="submenub">
+                    <li><a href="{:url('Admin/lst')}"><i class="icon-font">&#xe006;</i>管理员管理</a></li>
+                    <!--<li><a href=""><i class="icon-font">&#xe017;</i>系统设置</a></li>-->
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<script src="__PUBLIC__/static/index/style/common.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#submenua').hide();
+        $('#gena').click(function () {
+            $('#submenua').show();
+        })
+        $('#submenub').hide();
+        $('#genb').click(function () {
+            $('#submenub').show();
+        })
+    })
+</script>

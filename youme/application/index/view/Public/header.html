@@ -1,0 +1,19 @@
+<div id="divTop">
+    <h1 id="BlogTitle"><a href=""><img src="__PUBLIC__/static/index/images/btf.png"
+                                                             alt=""
+                                                             onMouseover="shake(this,'onmouseout')"/></a>
+    </h1>
+    <!-- <h3 id="BlogSubTitle">www.Youmew.com</h3> -->
+</div>
+<div id="divNavBar">
+    <ul>
+        <li><a href="{:url('index/index')}">首页</a></li>
+        {volist name="navres" id="vo"}
+        {if condition="$vo['type'] eq 0"}
+        <li><a href="{:url('lst/index',array('cateid'=>$vo.id))}">{$vo.catename}</a></li>
+        {/if}
+        {/volist}
+        <li><a href="{:url('guest/index')}">留言板</a></li>
+        <!--<li><a href="http://www.youmew.com/guestbook.html" title="沟通从这里开始">留言本</a></li>-->
+    </ul>
+</div>

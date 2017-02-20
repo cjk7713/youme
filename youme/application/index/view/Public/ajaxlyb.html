@@ -1,0 +1,120 @@
+<!--利用ajax留言-->
+<ins style="display:none;" id="AjaxCommentBegin"></ins>
+{$res}
+<!--{//volist name="linkres" id="vo"}-->
+<!--<ul class="msg" id="cmt1605">-->
+    <!--<li class="msgname"><img class="avatar"width="32"/>&nbsp;<span class="commentname"><a-->
+            <!--href="" rel="nofollow" target="_blank">称呼名字</a></span><br/>-->
+        <!--<small>&nbsp;发布时间&nbsp;2017-1-18 23:49:16&nbsp;&nbsp;</small>-->
+    <!--</li>-->
+    <!--<li class="msgarticle">发言</li>-->
+<!--</ul>-->
+<!--{///volist}-->
+<span id="ajaxadd"></span>
+<ins style="display:none;" id="AjaxCommentEnd"></ins>
+<!--利用ajax留言end-->
+
+<div class="post" id="divCommentPost">
+    <p class="posttop">发表留言:</p>
+    <form id="frmSumbit" target="_self" method="post" enctype="multipart/form-data">
+        <!--<p>-->
+            <!--<label>头像</label>-->
+            <!--<input type="file" name="gface" id="gface">-->
+        <!--</p>-->
+        <p id="gnameh">
+            <input type="text" name="gname" id="gname" class="text" size="28" tabindex="1"/>
+            <label for="gname">称呼</label>
+        </p>
+        <p><label for="gdesc">评论内容:</label></p>
+        <p>
+            <textarea name="gdesc" id="gdesc" onchange="GetActiveText(this.id);"
+                     onclick="GetActiveText(this.id);" onfocus="GetActiveText(this.id);" class="text"
+                     cols="50" rows="4" tabindex="5"></textarea>
+            <label for="gdesc"></label>
+        </p>
+        <hr>
+        <p id="ylink">
+        <input type="radio" name="ylink" id="llink" value="1" checked="checked"> <label for="llink">留言</label>
+        <input type="radio" name="ylink" id="qlink" value="2"> <label for="qlink">申请友情链接请勾选</label>
+
+        </p>
+        <p id="ylinkp">
+            <input type="text" name="gtitle" id="gtitle" class="text" size="28"
+                   tabindex="2" placeholder="如果不勾选申请不用填"/>
+            <label for="gtitle">链接标题</label>
+            <br>
+            <input type="text" name="glink" id="glink" class="text" size="28"
+                   tabindex="3" placeholder="如果不勾选申请不用填"/>
+            <label for="glink">个人链接</label>
+        </p>
+
+        <p>
+            <input id="btnpos" name="gbutoon" type="button" tabindex="6" value="提交" class="button"/>
+            <script language="JavaScript" type="text/javascript">objActive = "txaArticle";
+            ExportUbbFrame();</script>
+        </p>
+    </form>
+    <p class="postbottom">◎留下您的链接，发表您的看法、留言。</p>
+
+    <!--<script language="JavaScript" type="text/javascript">LoadRememberInfo();</script>-->
+</div>
+<script src="__PUBLIC__/static/index/style/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+    $('#ylinkp').hide();
+    $("#llink").click(function () {
+        $('#ylinkp').hide();
+        $('#gnameh').show();
+    })
+    $("#qlink").click(function () {
+        $('#ylinkp').show();
+        $('#gnameh').hide();
+    })
+    $("#btnpos").click(function (e) {
+
+        e.preventDefault();//防止多次提交
+//        var gface = $("#gface").val();
+        //判断上传文件的后缀名
+//        if(gface) {
+//            var strExtension = gface.substr(gface.lastIndexOf('.') + 1);
+//            if (strExtension != 'jpg' && strExtension != 'gif'
+//                    && strExtension != 'png' && strExtension != 'bmp') {
+//                alert("请选择图片文件格式");
+//                return;
+//            }
+//        }
+        var ylink = $("input[name='ylink']:checked").val()//判断radio值
+        $.ajax(
+                {
+                    type:"POST",
+                    url:"{:url('guest/add')}",
+                    dataType:"json",
+                    data:{
+                        'gname':$("#gname").val(),
+
+                        'gdesc':$("#gdesc").val(),
+
+//                        'gface':$("#gface").val(),
+                        'gtitle':$("#gtitle").val(),
+                        'glink':$("#glink").val(),
+                        'ylink':ylink,
+                    },
+                    success:function (msg)
+                    {
+                        if(msg.sta==1){
+                            $(msg.guestres).hide().insertBefore('#ajaxadd').slideDown();
+//                        }
+//                        else if(msg.sta==0) {
+//                            alert('验证码错误')
+                        }else if(msg.sta==2){
+                            alert('向管理员提交友情链接成功');
+                        }
+                        else{
+                            alert(msg.sta);
+                        }
+                    },
+                }
+          )
+    });
+});
+</script>

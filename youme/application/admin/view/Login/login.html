@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>后台登录</title>
+    <link href="__PUBLIC__/static/admin/css/admin_login.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div class="admin_login_wrap">
+    <h1>后台管理</h1>
+    <div class="adming_login_border">
+        <div class="admin_input">
+            <form action="" method="post">
+                <ul class="admin_items">
+                    <li>
+                        <label for="user">用户名：</label>
+                        <input type="text" name="username" value="" id="user" size="35" class="admin_input_style" />
+                    </li>
+                    <li>
+                        <label for="pwd">密码：</label>
+                        <input type="password" name="password" value="" id="pwd" size="35" class="admin_input_style" />
+                    </li>
+                    <li>
+                        <!--验证码-->
+                        <img id="captcha_img" onclick="this.src='{:captcha_src()}?d='+Math.random();" alt="点击更换" title="点击更换" src="{:captcha_src()}" class="m">
+                        <input type="text" name="vrityimg" value="" id="vrityimg" size="35" class="admin_input_style" placeholder="看不清请点击验证码刷新"/>
+                    </li>
+                    <li>
+                        <input type="submit" tabindex="3" value="提交" class="btn btn-primary" />
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+</html>

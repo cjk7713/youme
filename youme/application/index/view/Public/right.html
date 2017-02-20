@@ -1,0 +1,139 @@
+<script src="__PUBLIC__/static/index/style/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+    //    if(typeof jQuery !='undefined'){
+    //
+    //        alert("jQuery library is loaded!");
+    //
+    //    }else{
+    //
+    //        alert("jQuery library is not found!");
+    //
+    //    }
+    //绑定一个mouseover事件
+   $(document).ready(function () {
+       $("#fun_ul1").hide();
+       $("#fun_ul2").hide()
+       $("#fun_ul3").hide()
+   });
+    var flag_a=true;
+    var flag_b=true;
+    var flag_c=true;
+   function divfun_1() {
+       if (!flag_a) {
+           $("#fun_ul1").hide()
+//       表示display:none;
+           flag_a = true;
+       } else {
+           $("#fun_ul1").show()
+           flag_a = false;
+       }
+   }
+    function divfun_2() {
+        if (!flag_b) {
+            $("#fun_ul2").hide()
+//       表示display:none;
+            flag_b = true;
+        } else {
+            $("#fun_ul2").show()
+            flag_b = false;
+        }
+    }
+    function divfun_3() {
+        if (!flag_c) {
+            $("#fun_ul3").hide()
+//       表示display:none;
+            flag_c = true;
+        } else {
+            $("#fun_ul3").show()
+            flag_c = false;
+        }
+    }
+</script>
+<div id="divSidebar">
+    <dl class="function" id="divSearchPanel">
+        <dt class="function_t">搜索</dt>
+        <dd class="function_c">
+            <div>
+                <div style="padding:0.5em 0 0.5em 1em;">
+                    <form method="post" action="{:url('search/index')}">
+                        <input type="text" name="edtSearch" id="edtSearch" size="12" placeholder="请输入标签"/>
+                        <input type="submit" value="提交" name="btnPost" id="btnPost"
+                               onMouseover="shake(this,'onmouseout')"/>
+                    </form>
+                </div>
+            </div>
+        </dd>
+    </dl>
+    <dl class="function" id="divTags">
+        <dt class="function_t" id="tagdiv"onclick="divfun_1()">标签浏览</dt>
+
+        <dd class="function_c" id="fun_ul1">
+            <ul >
+                {volist name="tag_key" id="vo"}
+                <li class="tag-name tag-name-size-2"><a
+                        href="{:url('Tags/index',array('tags'=>$vo))}">{$vo}<span
+                        class="tag-count"> (18)</span></a>
+                </li>
+                {/volist}
+            </ul>
+        </dd>
+    </dl>
+    <dl class="function" id="divComments">
+        <dt class="function_t" onclick="divfun_2()">最新留言</dt>
+        <dd class="function_c" id="fun_ul2">
+            <ul>
+                {volist name="gue" id="vo"}
+                <li style="text-overflow:ellipsis;text-decoration: underline;"><a href="{:url('guest/index')}#{$vo.gname}">{$vo.gdesc}</a>
+                </li>
+                {/volist}
+            </ul>
+        </dd>
+    </dl>
+    <dl class="function" id="divLinkage">
+        <dt class="function_t" onclick="divfun_3()">友情链接</dt>
+        <dd class="function_c" id="fun_ul3">
+            <ul>
+                {volist name="rlink" id="vo"}
+                <li>
+                    <a href="{$vo.url}" target="_blank">{$vo.title}</a>
+                </li>
+                {/volist}
+                <li>
+                    <a href="{:url('guest/index')}#divCommentPost" title="申请链接"><span
+                            style="color:#006000;">提交友情链接</span>
+                    </a>
+                </li>
+            </ul>
+        </dd>
+    </dl>
+    <dl class="function" id="divMisc">
+        <dt class="function_t">分享</dt>
+        <dd class="function_c" >
+            <ul>
+                <li><img src="__PUBLIC__/static/index/images/weixin.jpg" height="110" width="110" border="0"
+                         alt="微信" title="微信扫一扫，关注wo最新消息。"/></li>
+                <li><!-- Baidu Button BEGIN -->
+                    <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a
+                            title="分享到微信" href="#" class="bds_weixin" data-cmd="weixin"></a><a
+                            title="分享到QQ空间" href="#" class="bds_qzone" data-cmd="qzone"></a><a
+                            title="分享到百度贴吧" href="#" class="bds_tieba" data-cmd="tieba"></a><a
+                            title="分享到新浪微博" href="#" class="bds_tsina" data-cmd="tsina"></a></div>
+                    <script>window._bd_share_config = {
+                        "common": {
+                            "bdSnsKey": {},
+                            "bdText": "",
+                            "bdMini": "2",
+                            "bdMiniList": ["sqq", "weixin", "qzone", "tsina", "tieba", "douban"],
+                            "bdPic": "",
+                            "bdStyle": "0",
+                            "bdSize": "16"
+                        }, "share": {}
+                    };
+                    with (document)0[(getElementsByTagName('head')[0] || body).appendChild(createElement('script')).src = 'http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion=' + ~(-new Date() / 36e5)];</script>
+                    <!-- Baidu Button END --></li>
+                <li><a href=""><img
+                        src="__PUBLIC__/static/index/images/rss.png" height="31" width="88" border="0"/></a></li>
+            </ul>
+        </dd>
+    </dl>
+</div>
