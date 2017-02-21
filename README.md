@@ -1,2 +1,2 @@
-# youme
-blog
+#tp5做的个人博客
+blog后台用户名admin密码123456
